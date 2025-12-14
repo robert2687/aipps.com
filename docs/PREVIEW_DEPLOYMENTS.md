@@ -23,6 +23,26 @@ When you open a pull request, GitHub Actions automatically:
 - Firebase project configured (see `.env.example`)
 - Appropriate Firebase permissions
 
+### Initial Setup
+
+1. **Configure Firebase project**:
+   ```bash
+   # Copy the example file
+   cp .firebaserc.example .firebaserc
+   
+   # Edit .firebaserc and replace 'your-project-id' with your actual project ID
+   ```
+
+2. **Authenticate with Firebase**:
+   ```bash
+   firebase login
+   ```
+
+3. **Verify your setup**:
+   ```bash
+   firebase projects:list
+   ```
+
 ### Manual Preview Deployment
 
 After the automated build completes, you can deploy to a Firebase preview channel:
