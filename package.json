@@ -12,7 +12,8 @@
     "dev": "genkit start -- npx nodemon --ext prompt --watch prompts --exec next dev",
     "dev:next": "next dev",
     "dev:genkit": "genkit start -- npx nodemon --ext prompt --watch prompts --exec \"tsx --watch src/index.ts\"",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify": "node scripts/verify-setup.js"
   },
   "dependencies": {
     "@genkit-ai/firebase": "^0.9",

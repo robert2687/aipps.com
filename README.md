@@ -31,7 +31,22 @@ Before you begin, ensure you have:
 npm install
 ```
 
-### 2. Configure Firebase
+### 2. Verify Setup (Optional but Recommended)
+
+Run the setup verification script to check your environment:
+
+```bash
+npm run verify
+```
+
+This will check for:
+- Correct Node.js version
+- Installed dependencies
+- Environment configuration
+- Google Cloud authentication
+- Project structure integrity
+
+### 3. Configure Firebase
 
 Create a `.env.local` file based on `.env.example`:
 
@@ -43,7 +58,7 @@ Then update the `FIREBASE_PROJECT_ID` in `.env.local` with your Firebase project
 
 Alternatively, you can directly edit `src/lib/genkit/genkit.config.ts` and replace `'your-project-id'` with your actual Firebase project ID.
 
-### 3. Authenticate with Google Cloud
+### 4. Authenticate with Google Cloud
 
 ```bash
 gcloud auth application-default login
@@ -51,7 +66,7 @@ gcloud auth application-default login
 
 See [Genkit documentation](https://firebase.google.com/docs/genkit/plugins/vertex-ai) for more information.
 
-### 4. Run the Application
+### 5. Run the Application
 
 #### Option A: Run Next.js app with Genkit UI
 
