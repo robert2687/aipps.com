@@ -107,6 +107,15 @@ To start the production server:
 npm start
 ```
 
+### Google Cloud Build
+
+The repository includes a `cloudbuild.yaml` configuration file for building the application with Google Cloud Build. The build process:
+1. Uses Node.js 20
+2. Installs dependencies with `npm ci`
+3. Builds the application with `npm run build`
+
+Cloud Build will automatically detect and use this configuration file when triggered.
+
 ## Development
 
 ### Project Structure
