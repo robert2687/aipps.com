@@ -19,6 +19,8 @@
     "@genkit-ai/vertexai": "^0.9",
     "clsx": "^2.1.1",
     "firebase-admin": "^12.2.0",
+    "genkit": "^0.9",
+    "next": "14.2.33",
     "genkit": "^1.22.0",
     "next": "14.2.35",
     "react": "^18",
