@@ -74,7 +74,7 @@ jobs:
             
             > **Note**: This workflow builds the app and verifies the build output. 
             > For actual deployment, Firebase credentials would be required.
-            > See [PREVIEW.md](../blob/main/PREVIEW.md) for more information.
+            > See [Preview Deployments Guide](../blob/main/docs/PREVIEW_DEPLOYMENTS.md) for more information.
             `;
             
             await github.rest.issues.createComment({

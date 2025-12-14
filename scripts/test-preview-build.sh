@@ -17,7 +17,7 @@ NC='\033[0m' # No Color
 # Step 1: Check Node.js version
 echo -e "${BLUE}Step 1: Checking Node.js version...${NC}"
 NODE_VERSION=$(node -v | sed 's/v//' | cut -d. -f1)
-if [ "$NODE_VERSION" -eq 20 ] || [ "$NODE_VERSION" -eq 22 ]; then
+if [ "$NODE_VERSION" = "20" ] || [ "$NODE_VERSION" = "22" ]; then
     echo -e "${GREEN}✓ Node.js version $NODE_VERSION is supported${NC}"
 else
     echo -e "${YELLOW}⚠ Warning: Node.js $NODE_VERSION detected. Recommended: 20 or 22${NC}"
