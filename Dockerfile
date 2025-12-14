@@ -1,14 +1,15 @@
 # Use Node.js 20 as base image
-FROM node:20-alpine AS base
+FROM node:20 AS base
 
 # Install dependencies only when needed
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-RUN npm ci
+
+# Install dependencies
+RUN npm ci --only=production=false || npm install
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -26,8 +27,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=8080
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Create a non-root user
+RUN groupadd --system --gid 1001 nodejs && \
+    useradd --system --uid 1001 nextjs
 
 # Copy necessary files
 COPY --from=builder /app/public ./public

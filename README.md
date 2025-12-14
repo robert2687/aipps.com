@@ -116,6 +116,19 @@ The repository includes a `cloudbuild.yaml` configuration file for building the 
 
 Cloud Build will automatically detect and use this configuration file when triggered.
 
+## Preview Deployments
+
+This repository includes an automated preview deployment system for pull requests. When you open or update a PR, a preview environment is automatically deployed to Google Cloud Run and a comment is added to the PR with the preview URL.
+
+For detailed setup instructions and configuration, see [PREVIEW_DEPLOYMENT.md](PREVIEW_DEPLOYMENT.md).
+
+**Quick Setup:**
+1. Enable Cloud Run and Container Registry APIs in your GCP project
+2. Create a service account with Cloud Run Admin, Storage Admin, and Service Account User roles
+3. Add `GCP_PROJECT_ID` and `GCP_SA_KEY` secrets to your GitHub repository
+
+Preview deployments are automatically cleaned up when PRs are closed.
+
 ## Development
 
 ### Project Structure
