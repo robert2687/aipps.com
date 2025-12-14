@@ -21,7 +21,7 @@ import { vertexAI } from '@genkit-ai/vertexai';
 // Your web app's Firebase configuration
 // You can set the FIREBASE_PROJECT_ID environment variable or replace the value below
 const firebaseConfig = {
-  projectId: process.env.FIREBASE_PROJECT_ID || 'your-project-id',
+  projectId: process.env.FIREBASE_PROJECT_ID || 'aipps01',
 };
 
 export const getProjectId = () => firebaseConfig.projectId;
