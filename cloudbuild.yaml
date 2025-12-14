@@ -15,19 +15,9 @@ steps:
     id: 'build-application'
     waitFor: ['install-dependencies']
 
-# Store the build artifacts
-artifacts:
-  objects:
-    location: 'gs://${PROJECT_ID}_cloudbuild/artifacts'
-    paths:
-      - '.next/**'
-      - 'package.json'
-      - 'next.config.mjs'
-
-# Build timeout (default is 10 minutes, increasing for larger builds)
+# Build timeout (default is 10 minutes, extended for npm install and Next.js build)
 timeout: '1200s'
 
 # Options for the build
 options:
-  machineType: 'N1_HIGHCPU_8'
   logging: CLOUD_LOGGING_ONLY
