@@ -19,10 +19,9 @@ import { enableFirebaseTelemetry } from '@genkit-ai/firebase';
 import { vertexAI } from '@genkit-ai/vertexai';
 
 // Your web app's Firebase configuration
+// You can set the FIREBASE_PROJECT_ID environment variable or replace the value below
 const firebaseConfig = {
-  // ...
-  projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
-  // ...
+  projectId: process.env.FIREBASE_PROJECT_ID || 'your-project-id',
 };
 
 export const getProjectId = () => firebaseConfig.projectId;
