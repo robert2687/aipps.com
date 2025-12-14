@@ -1,0 +1,93 @@
+name: Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [ "main" ]
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      checks: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v6.1.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build application
+        run: npm run build
+      
+      - name: Verify build output
+        run: |
+          if [ ! -d ".next" ]; then
+            echo "Error: .next directory was not created by the build"
+            exit 1
+          fi
+          echo "✅ Build output verified: .next directory exists"
+          ls -la .next/
+      
+      - name: Comment PR with Preview Info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const repoName = context.repo.repo;
+            const ownerName = context.repo.owner;
+            
+            const comment = `## 🎉 Preview Build Successful!
+            
+            Your preview build has completed successfully.
+            
+            ### 📦 Build Details
+            - **Commit**: \`${context.sha.substring(0, 7)}\`
+            - **Branch**: \`${context.ref}\`
+            - **Build Time**: ${new Date().toISOString()}
+            
+            ### 🚀 Next Steps
+            
+            To deploy this preview to Firebase App Hosting:
+            
+            \`\`\`bash
+            # Authenticate with Firebase
+            firebase login
+            
+            # Deploy to preview channel
+            firebase hosting:channel:deploy pr-${prNumber} --expires 7d
+            \`\`\`
+            
+            ### 📋 Preview Checklist
+            - ✅ Build successful
+            - ✅ No build errors
+            - ✅ Ready for manual deployment
+            
+            > **Note**: This workflow builds the app and verifies the build output. 
+            > For actual deployment, Firebase credentials would be required.
+            > See [PREVIEW.md](../blob/main/PREVIEW.md) for more information.
+            `;
+            
+            await github.rest.issues.createComment({
+              owner: ownerName,
+              repo: repoName,
+              issue_number: prNumber,
+              body: comment
+            });
+      
+      - name: Upload Preview Artifact
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: preview-build-pr-${{ github.event.pull_request.number }}
+          path: .next/
+          retention-days: 7
+          if-no-files-found: error
