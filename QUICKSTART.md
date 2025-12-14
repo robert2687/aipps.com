@@ -15,7 +15,8 @@ This guide will help you get the Compass application running quickly.
 ### 1. Clone and Install
 
 ```bash
-git clone https://github.com/robert2687/aipps.com.git
+# Clone your repository
+git clone <your-repository-url>
 cd aipps.com
 npm install
 ```

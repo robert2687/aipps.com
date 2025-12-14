@@ -18,7 +18,9 @@ console.log('✓ Checking Node.js version...');
 const nodeVersion = process.version;
 const majorVersion = parseInt(nodeVersion.split('.')[0].substring(1));
 if (majorVersion !== 20 && majorVersion !== 22) {
-  console.error(`  ❌ Node.js version ${nodeVersion} is not supported. Please use Node.js 20 or 22.`);
+  console.error(`  ❌ Node.js version ${nodeVersion} is not officially supported.`);
+  console.error(`     This project requires Node.js 20 or 22 (as specified in package.json).`);
+  console.error(`     Other versions may work but are not tested.`);
   hasErrors = true;
 } else {
   console.log(`  ✓ Node.js ${nodeVersion} is supported`);
@@ -77,7 +79,7 @@ if (fs.existsSync(configPath)) {
 // Check gcloud authentication
 console.log('\n✓ Checking Google Cloud authentication...');
 try {
-  execSync('gcloud auth application-default print-access-token', { 
+  execSync('gcloud config get-value account', { 
     stdio: 'pipe',
     timeout: 5000 
   });
