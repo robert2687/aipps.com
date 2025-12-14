@@ -1,0 +1,84 @@
+# CodeQL Advanced Security Analysis
+# 
+# This workflow performs advanced CodeQL security scanning.
+# 
+# IMPORTANT: If you have GitHub's default code scanning enabled in repository settings,
+# you must disable it to use this custom workflow, or this workflow will conflict.
+# To disable default setup: Settings > Code security and analysis > Code scanning > 
+# Configure > Disable default setup
+#
+# Alternatively, this workflow is configured to run only on schedule to avoid conflicts
+# with default setup that runs on push/pull_request events.
+
+name: "CodeQL Advanced"
+
+on:
+  # Run on schedule only to avoid conflicts with default code scanning
+  schedule:
+    - cron: '27 17 * * 5'  # Weekly on Friday at 17:27 UTC
+  
+  # Manual trigger option
+  workflow_dispatch:
+  
+  # Uncomment these if you've disabled default code scanning in repository settings:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: 360
+    permissions:
+      # Required for all workflows
+      security-events: write
+      # Required to fetch internal or private CodeQL packs
+      packages: read
+      # Only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: javascript-typescript
+          build-mode: none
+        # CodeQL supports: 'actions', 'c-cpp', 'csharp', 'go', 'java-kotlin', 
+        # 'javascript-typescript', 'python', 'ruby', 'rust', 'swift'
+        
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v6.1.0
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    # Initialize CodeQL tools for scanning
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v4
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+        # Enable additional query suites for more comprehensive analysis
+        queries: security-extended,security-and-quality
+
+    # Manual build step for compiled languages (not needed for JavaScript/TypeScript)
+    - name: Run manual build steps
+      if: matrix.build-mode == 'manual'
+      shell: bash
+      run: |
+        echo 'Manual build mode detected. Add build commands here.'
+        exit 1
+
+    # Perform CodeQL analysis and upload results
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v4
+      with:
+        category: "/language:${{matrix.language}}"
+        upload: true
