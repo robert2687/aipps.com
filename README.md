@@ -12,6 +12,7 @@ This is the code for [Build gen AI features powered by your data with Firebase G
 - 🏖️ Categorized activities and attractions
 - 🖼️ Image upload and AI description generation
 - 📱 Responsive mobile-first design
+- 🚀 Automated preview deployments for pull requests
 
 ## Prerequisites
 
@@ -168,6 +169,24 @@ npm run lint
 - **Tailwind CSS** - Styling
 - **TypeScript** - Type safety
 - **Sass** - CSS preprocessing
+
+## Preview Deployments
+
+This repository is configured with automated preview deployments for pull requests. When you open a PR, GitHub Actions will automatically build and prepare your changes for preview.
+
+For detailed information about setting up and using preview deployments, see [Preview Deployments Guide](docs/PREVIEW_DEPLOYMENTS.md).
+
+Quick preview commands:
+```bash
+# Deploy to a preview channel
+firebase hosting:channel:deploy pr-123 --expires 7d
+
+# List active previews
+firebase hosting:channel:list
+
+# Delete a preview
+firebase hosting:channel:delete pr-123
+```
 
 ## License
 
