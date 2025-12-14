@@ -33,8 +33,18 @@ jobs:
 
       - name: Delete Container Images
         run: |
-          gcloud container images delete gcr.io/$PROJECT_ID/$SERVICE_NAME \
-            --quiet || echo "Image not found or already deleted"
+          # List all tags for this PR's image and delete them
+          IMAGE_NAME="gcr.io/$PROJECT_ID/$SERVICE_NAME"
+          TAGS=$(gcloud container images list-tags $IMAGE_NAME --format="get(tags)" --filter="tags:*" 2>/dev/null || echo "")
+          
+          if [ -n "$TAGS" ]; then
+            for TAG in $TAGS; do
+              gcloud container images delete "${IMAGE_NAME}:${TAG}" --quiet 2>/dev/null || true
+            done
+            echo "Deleted image tags for $SERVICE_NAME"
+          else
+            echo "No images found for $SERVICE_NAME"
+          fi
 
       - name: Comment on PR
         uses: actions/github-script@v7

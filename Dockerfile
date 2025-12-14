@@ -8,8 +8,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production=false || npm install
+# Install all dependencies (including devDependencies for building)
+RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -42,4 +42,4 @@ USER nextjs
 EXPOSE 8080
 
 # Use Next.js production server
-CMD ["npx", "next", "start", "-p", "8080"]
+CMD ["npm", "run", "start:prod", "--", "-p", "8080"]
