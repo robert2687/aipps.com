@@ -31,9 +31,6 @@ export default function RootLayout({
     <html lang="en" className="flex items-center justify-center min-h-[100dvh]">
       <body
         className="font-sans text-foreground flex justify-center sm:-translate-y-0 h-full sm:h-[800px] sm:bg-gray-200 w-full sm:max-w-[412px] sm:shadow-2xl"
-        style={{
-          fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-        }}
       >
         {children}
       </body>
