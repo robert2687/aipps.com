@@ -12,7 +12,8 @@
     "dev": "genkit start -- npx nodemon --ext prompt --watch prompts --exec next dev",
     "dev:next": "next dev",
     "dev:genkit": "genkit start -- npx nodemon --ext prompt --watch prompts --exec \"tsx --watch src/index.ts\"",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify": "node scripts/verify-setup.js"
   },
   "dependencies": {
     "@genkit-ai/firebase": "^0.9",
@@ -20,8 +21,6 @@
     "clsx": "^2.1.1",
     "firebase-admin": "^12.2.0",
     "genkit": "^0.9",
-    "next": "14.2.33",
-    "genkit": "^1.22.0",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
@@ -35,9 +34,11 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "genkit-cli": "^0.9.12",
+    "nodemon": "^3.0.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "tailwindcss": "^3.4.6",
+    "tsx": "^4.0.0",
     "typescript": "^5.5.3"
   }
 }

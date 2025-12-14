@@ -1,32 +1,154 @@
-# Build gen AI features powered by your data with Firebase Genkit
+# Compass - AI-Powered Travel Planning App
+
+This is a complete travel planning application built with Next.js, Firebase Genkit, and Vertex AI. It provides AI-powered trip itinerary generation and destination discovery features.
 
 This is the code for [Build gen AI features powered by your data with Firebase Genkit](https://firebase.google.com/codelabs/ai-genkit-rag) codelab.
 
+## Features
+
+- 🗺️ Browse and search travel destinations
+- 🤖 AI-powered trip planning with Gemini
+- 📅 Multi-day itinerary generation
+- 🏖️ Categorized activities and attractions
+- 🖼️ Image upload and AI description generation
+- 📱 Responsive mobile-first design
+
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- Node.js 20 or 22 installed
+- A Google Cloud Platform project with:
+  - Vertex AI API enabled
+  - Firebase project configured
+- Google Cloud SDK (`gcloud`) installed
+
 ## Getting Started
 
-First, update `src/lib/genkit/genkit.config.js` with your own Firebase project id and login using `gcloud auth application-default login`.
-See [Genkit documentation](https://firebase.google.com/docs/genkit/plugins/vertex-ai) for more information.
-
-Then install the dependencies:
+### 1. Install Dependencies
 
 ```bash
 npm install
 ```
 
-Then run Genkit UI standalone sandbox:
+### 2. Verify Setup (Optional but Recommended)
+
+Run the setup verification script to check your environment:
 
 ```bash
-npm run dev:genkit
+npm run verify
 ```
 
-Alternatively, run Genkit UI alongside the Next.js development server:
+This will check for:
+- Correct Node.js version
+- Installed dependencies
+- Environment configuration
+- Google Cloud authentication
+- Project structure integrity
+
+### 3. Configure Firebase
+
+Create a `.env.local` file based on `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+Then update the `FIREBASE_PROJECT_ID` in `.env.local` with your Firebase project ID.
+
+Alternatively, you can directly edit `src/lib/genkit/genkit.config.ts` and replace `'your-project-id'` with your actual Firebase project ID.
+
+### 4. Authenticate with Google Cloud
+
+```bash
+gcloud auth application-default login
+```
+
+See [Genkit documentation](https://firebase.google.com/docs/genkit/plugins/vertex-ai) for more information.
+
+### 5. Run the Application
+
+#### Option A: Run Next.js app with Genkit UI
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:4000](http://localhost:4000) with your browser to lauch Genkit UI.
+This starts both the Genkit UI and Next.js development server.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the Next.js app.
+- Open [http://localhost:3000](http://localhost:3000) to view the app
+- Open [http://localhost:4000](http://localhost:4000) to view Genkit UI
 
-You can start editing the app by modifying `genkit-functions/src/lib/itineraryFlow.ts`, `src/app/gemini/page.tsx`. The page auto-updates as you edit the file.
+#### Option B: Run Next.js only
+
+```bash
+npm run dev:next
+```
+
+#### Option C: Run Genkit UI standalone
+
+```bash
+npm run dev:genkit
+```
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+This command:
+1. Builds the Next.js application
+2. Copies prompt files to the output directory
+
+To start the production server:
+
+```bash
+npm start
+```
+
+## Development
+
+### Project Structure
+
+```
+├── src/
+│   ├── app/              # Next.js app router pages
+│   │   ├── gemini/       # AI-powered trip planning
+│   │   └── legacy/       # Traditional destination browsing
+│   ├── components/       # React components
+│   ├── lib/              # Utilities and Genkit flows
+│   │   ├── genkit/       # Genkit configuration and flows
+│   │   └── ...
+│   └── data/             # Static destination and activity data
+├── prompts/              # Genkit prompt files
+└── public/               # Static assets
+```
+
+### Key Files
+
+- `src/lib/genkit/itineraryFlow.ts` - AI itinerary generation flow
+- `src/app/gemini/page.tsx` - AI trip planning UI
+- `src/app/page.tsx` - App home page
+- `src/lib/genkit/genkit.config.ts` - Genkit and Vertex AI configuration
+
+### Linting
+
+```bash
+npm run lint
+```
+
+## Technologies Used
+
+- **Next.js 14** - React framework
+- **Firebase Genkit** - AI orchestration framework
+- **Vertex AI** - Google's AI platform
+- **Tailwind CSS** - Styling
+- **TypeScript** - Type safety
+- **Sass** - CSS preprocessing
+
+## License
+
+Copyright 2024 Google LLC - Apache License 2.0
+
+See [LICENSE](LICENSE) for details.
