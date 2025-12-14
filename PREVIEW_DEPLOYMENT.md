@@ -59,6 +59,8 @@ Add the following secrets to your GitHub repository (Settings → Secrets and va
    
    Copy the entire contents of `key.json` as the secret value.
 
+**Security Note:** For enhanced security, consider using [Workload Identity Federation](https://cloud.google.com/iam/docs/workload-identity-federation) instead of service account JSON keys. This eliminates the need to store long-lived credentials and provides better security through automatic credential rotation.
+
 ### Enable Required APIs
 
 ```bash

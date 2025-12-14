@@ -41,5 +41,5 @@ USER nextjs
 
 EXPOSE 8080
 
-# Use Next.js production server
-CMD ["npm", "run", "start:prod", "--", "-p", "8080"]
+# Use Next.js production server (PORT env var is already set to 8080)
+CMD ["npm", "run", "start:prod"]
