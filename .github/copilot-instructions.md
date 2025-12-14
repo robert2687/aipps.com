@@ -55,7 +55,8 @@ Compass is an AI-powered travel planning application built with Next.js, Firebas
 
 ### Development Commands
 
-- `npm start` or `npm run dev` - Start both Genkit UI and Next.js development server
+- `npm start` - Alias for `npm run dev` (starts both Genkit UI and Next.js development server)
+- `npm run dev` - Start both Genkit UI and Next.js development server
 - `npm run dev:next` - Start Next.js only (port 3000)
 - `npm run dev:genkit` - Start Genkit UI standalone (port 4000)
 - `npm run build` - Build for production (includes copying prompts)
