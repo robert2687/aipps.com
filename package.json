@@ -35,7 +35,7 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "^15.5.9",
-    "genkit-cli": "^0.9.12",
+    "genkit-cli": "^1.26.0",
     "nodemon": "^3.0.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
