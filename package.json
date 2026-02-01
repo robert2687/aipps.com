@@ -21,9 +21,9 @@
     "@genkit-ai/firebase": "^0.9",
     "@genkit-ai/vertexai": "^0.9",
     "clsx": "^2.1.1",
-    "firebase-admin": "^12.2.0",
+    "firebase-admin": "^13.0.0",
     "genkit": "^0.9",
-    "next": "14.2.35",
+    "next": "15.5.10",
     "react": "^18",
     "react-dom": "^18",
     "sass": "1.91.0"
