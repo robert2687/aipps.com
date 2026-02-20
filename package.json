@@ -23,7 +23,7 @@
     "clsx": "^2.1.1",
     "firebase-admin": "^12.2.0",
     "genkit": "^0.9",
-    "next": "14.2.35",
+    "next": "15.5.10",
     "react": "^18",
     "react-dom": "^18",
     "sass": "1.91.0"
@@ -35,7 +35,7 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "^15.5.9",
-    "genkit-cli": "^0.9.12",
+    "genkit-cli": "^1.28.0",
     "nodemon": "^3.0.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
